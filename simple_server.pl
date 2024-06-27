@@ -17,30 +17,40 @@
 :- ensure_loaded(gratefuldead).
 
 % write an http_handler for each endpoint
-:- http_handler(root(hello_world), setlists_handler, []).		% (1)
-
+:- http_handler(root(setlists), setlists_handler, []).		% (1)
+:- http_handler(root(years), years_handler, []).	
+:- http_handler(root(months), months_handler, []).	
+:- http_handler(root(days), days_handler, []).	
+:- http_handler(root(cities), cities_handler, []).	
+:- http_handler(root(states), states_handler, []).
+:- http_handler(root(countries), countries_handler, []).		
+:- http_handler(root(venues), venues_handler, []).	
+:- http_handler(root(songs), setlists_handler, []).	
+:- http_handler(root(performers), setlists_handler, []).	
+:- http_handler(root(covers), setlists_handler, []).
+:- http_handler(root(tours), setlists_handler, []).		
 % start server
 server(Port) :-						% (2)
         http_server(http_dispatch, [port(Port)]).
 
 %endpoint handler functions.
 
-setup_request_term(Request, Term) :-
+
+setlists_handler(Request) :-
     cors_enable(Request,
                   [ methods([get,post,delete])
                   ]),
     http_parameters(Request, [ query(Query, []) ]), % Query to execute
-    term_string(Term, Query).
-
-setlists_handler(Request) :-
-    setup_request_term(Request, Term),
+    term_string(Term, Query),
 	findall(
-	    setlist(I,V,D,S),
+	    setlist(ID,venue(NAME,CITY,STATE),date(MONTH, DAY, YEAR),SONGS),
 	    (
             call(Term),
-            Term = setlist(I, V, D, S)
+            Term = setlist(ID,venue(NAME,CITY,STATE),date(MONTH, DAY, YEAR),SONGS)
 	    ),
 	    Setlists),
 	prolog_to_json(Setlists, JSON),
 	reply_json(json([setlists= JSON]), []).
+
+
 

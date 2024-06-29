@@ -59,5 +59,3 @@ path(Id, From, To, Visited, [From|Nodes] ) :-
     transition(Id, From, X),      
     not(member(X, Visited)),   
     path(Id, X, To, [X|Visited], Nodes).  
-
-

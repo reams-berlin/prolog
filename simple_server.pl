@@ -34,7 +34,8 @@
 :- initialization(main, main).
 
 main :-
-    getenv('PORT', Port),
+    getenv('PORT', PortStr),
+    atom_number(PortStr, Port),
     http_server(http_dispatch, [port(Port)]),
     prolog.
 

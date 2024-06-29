@@ -16,6 +16,8 @@
 
 :- ensure_loaded(gratefuldead).
 
+:- initialization(simple_server_main, main).
+
 % write an http_handler for each endpoint
 :- http_handler(root(setlists), setlists_handler, []).		% (1)
 :- http_handler(root(years), years_handler, []).	
@@ -29,6 +31,27 @@
 :- http_handler(root(performers), setlists_handler, []).	
 :- http_handler(root(covers), setlists_handler, []).
 :- http_handler(root(tours), setlists_handler, []).		
+
+simple_server_main :-
+    simple_server_impl(Opts),
+    prolog.
+
+simple_server_impl(Opts) :-
+    server_opts(Opts),
+    http_server(http_dispatch, [port(Opts.port)
+                 % TODO: enable ssl (https):
+                 % ssl([certificate_file('cacert.pem'), % or cert.csr?
+                 %      key_file('privkey.pem')]),
+                ]).
+
+%! server_opts(-Opts:dict) is det.
+% Process the command-line options into a dict.
+server_opts(Opts) :-
+    OptsSpec =
+        [[opt(port), type(integer), default(9999), longflags([port]),
+          help('Server port')]],
+    opt_arguments(OptsSpec, Opts0, PositionalArgs),
+    dict_create(Opts, opts, Opts0).
 % start server
 server(Port) :-						% (2)
         http_server(http_dispatch, [port(Port)]).

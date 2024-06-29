@@ -34,7 +34,8 @@
 
 simple_server_main :-
     getenv('PORT', Port),
-    http_server(http_dispatch, [port(Port)]).
+    http_server(http_dispatch, [port(Port)]),
+    prolog.
 
 
 

@@ -5,3 +5,4 @@ run:
   worker:
     command:
       - swipl simple_server.pl
+    iamge: web

@@ -24,6 +24,7 @@ function songToProlog(song) {
   song = song.replace('"', "");
   return `song("${song}"),`;
 }
+
 async function getDB() {
   let result = await axios("https://gddb-b7baf449e62a.herokuapp.com/setlists");
   let code = "";

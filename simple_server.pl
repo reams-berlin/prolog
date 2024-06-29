@@ -35,7 +35,6 @@
 
 main :-
     getenv('PORT', Port),
-        format('Starting server on port ~w~n', [Port]),
     http_server(http_dispatch, [port(Port)]).
 
 

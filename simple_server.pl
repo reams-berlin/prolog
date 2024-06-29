@@ -31,12 +31,13 @@
 :- http_handler(root(covers), setlists_handler, []).
 :- http_handler(root(tours), setlists_handler, []).		
 
-:- initialization(main, main).
+
 
 main :-
     getenv('PORT', PortStr),
     atom_number(PortStr, Port),
-    http_server(http_dispatch, [port(Port)]),
+        getenv('HOST', Host),
+    http_server(http_dispatch, [port(Host : Port)]),
     prolog.
 
 

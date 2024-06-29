@@ -34,10 +34,16 @@
 :- initialization(main, main).
 
 main :-
-    http_server(http_dispatch, [port(Host:Port)]).
+    getenv('HOST', Host),
+    getenv('PORT', PortStr),
+    atom_number(PortStr, Port),  % Convert PortStr to an integer
+        format('Starting server on port ~w~n', [Port]),
+    http_server(http_dispatch, [port(Host : Port)]).
 
 
 
+server(Port) :-						% (2)
+        http_server(http_dispatch, [port(Port)]).
 
 %endpoint handler functions.
 

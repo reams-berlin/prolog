@@ -34,12 +34,10 @@
 :- initialization(main, main).
 
 main :-
-    http_server(http_dispatch, [port(Port)]).
+    http_server(http_dispatch, [port(Host:Port)]).
 
 
 
-server(Port) :-						% (2)
-        http_server(http_dispatch, [port(Host:Port)]).
 
 %endpoint handler functions.
 

@@ -16,7 +16,6 @@
 
 :- ensure_loaded(gratefuldead).
 
-:- initialization(simple_server_main, main).
 
 % write an http_handler for each endpoint
 :- http_handler(root(setlists), setlists_handler, []).		% (1)
@@ -32,10 +31,12 @@
 :- http_handler(root(covers), setlists_handler, []).
 :- http_handler(root(tours), setlists_handler, []).		
 
-simple_server_main :-
-    getenv('PORT', Port),
-    http_server(http_dispatch, [port(Port)]),
-    prolog.
+:- initialization(main, main).
+
+main :-
+    getenv('PORT', PortStr),
+    atom_number(PortStr, Port),  % Convert PortStr to an integer
+    http_server(http_dispatch, [port(Port)]).
 
 
 

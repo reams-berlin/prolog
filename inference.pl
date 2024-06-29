@@ -1,5 +1,7 @@
 :- ensure_loaded(gratefuldead).
 
+% needs work
+
 % Id, From, To
 :- dynamic transition/3.
 

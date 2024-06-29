@@ -34,8 +34,7 @@
 :- initialization(main, main).
 
 main :-
-    getenv('PORT', PortStr),
-    atom_number(PortStr, Port),  % Convert PortStr to an integer
+    getenv('PORT', Port),
         format('Starting server on port ~w~n', [Port]),
     http_server(http_dispatch, [port(Port)]).
 

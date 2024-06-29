@@ -17,7 +17,7 @@
 :- ensure_loaded(gratefuldead).
 
 % write an http_handler for each endpoint
-:- http_handler(root(.), setlists_handler, []).		% (1)
+:- http_handler(root(setlists), setlists_handler, []).		% (1)
 :- http_handler(root(years), years_handler, []).	
 :- http_handler(root(months), months_handler, []).	
 :- http_handler(root(days), days_handler, []).	
@@ -51,6 +51,8 @@ setlists_handler(Request) :-
 	    Setlists),
 	prolog_to_json(Setlists, JSON),
 	reply_json(json([setlists= JSON]), []).
+
+
 
 
 

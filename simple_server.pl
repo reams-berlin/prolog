@@ -31,7 +31,7 @@
 :- http_handler(root(covers), setlists_handler, []).
 :- http_handler(root(tours), setlists_handler, []).		
 
-
+:- initialization(main, main).
 
 main :-
     getenv('PORT', PortStr),

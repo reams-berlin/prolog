@@ -16,4 +16,4 @@ RUN   apt-get update && \
 
 RUN   export PATH=/root/.local/bin:/usr/local/bin:/root/.local/bin:$PATH
 COPY simple_server.pl ./
-ENTRYPOINT swipl -g 'consult("simple_server.pl").' -g 'server(8080).'
+ENTRYPOINT swipl simple_server.pl -g 'server(8080).'

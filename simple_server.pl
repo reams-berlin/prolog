@@ -33,17 +33,13 @@
 :- http_handler(root(tours), setlists_handler, []).		
 
 :- initialization(main, main).
-
 main :-
     getenv('PORT', PortStr),
     atom_number(PortStr, Port),
-    	broadcast(http(pre_server_start)),
-	broadcast(http(pre_server_start(Port))),
 	http_server(http_dispatch,
 		    [ port(Port)
 		    ]),
-	broadcast(http(post_server_start(Port))),
-	broadcast(http(post_server_start)).
+            thread_get_message(stop).
 
 
 

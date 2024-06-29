@@ -36,8 +36,7 @@
 main :-
     getenv('PORT', PortStr),
     atom_number(PortStr, Port),
-    http_server(http_dispatch, [port(Port)]),
-    prolog.
+    http_server(http_dispatch, [port(Port)]).
 
 
 

@@ -37,8 +37,8 @@ simple_server_main :-
     prolog.
 
 simple_server_impl(Opts) :-
-    server_opts(Opts),
-    http_server(http_dispatch, [port(Opts.port)
+    getenv('PORT', Port)
+    http_server(http_dispatch, [port(Port)
                  % TODO: enable ssl (https):
                  % ssl([certificate_file('cacert.pem'), % or cert.csr?
                  %      key_file('privkey.pem')]),

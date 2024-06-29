@@ -33,26 +33,16 @@
 :- http_handler(root(tours), setlists_handler, []).		
 
 simple_server_main :-
-    simple_server_impl(Opts),
-    prolog.
-
-simple_server_impl(Opts) :-
-    getenv('PORT', Port)
+     getenv('PORT', Port)
     http_server(http_dispatch, [port(Port)
                  % TODO: enable ssl (https):
                  % ssl([certificate_file('cacert.pem'), % or cert.csr?
                  %      key_file('privkey.pem')]),
                 ]).
 
-%! server_opts(-Opts:dict) is det.
-% Process the command-line options into a dict.
-server_opts(Opts) :-
-    OptsSpec =
-        [[opt(port), type(integer), default(9999), longflags([port]),
-          help('Server port')]],
-    opt_arguments(OptsSpec, Opts0, PositionalArgs),
-    dict_create(Opts, opts, Opts0).
-% start server
+    prolog.
+
+
 server(Port) :-						% (2)
         http_server(http_dispatch, [port(Port)]).
 

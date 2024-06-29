@@ -6,6 +6,7 @@
 :- use_module(library(http/http_json)).
 :- use_module(library(pcre)).
 :- use_module(library(settings)).
+:- use_module(library(broadcast)).
 
 :- set_setting_default(http:cors, [*]).
 
@@ -36,7 +37,13 @@
 main :-
     getenv('PORT', PortStr),
     atom_number(PortStr, Port),
-    http_server(http_dispatch, [port(Port)]).
+    	broadcast(http(pre_server_start)),
+	broadcast(http(pre_server_start(Port))),
+	http_server(http_dispatch,
+		    [ port(Port)
+		    ]),
+	broadcast(http(post_server_start(Port))),
+	broadcast(http(post_server_start)).
 
 
 

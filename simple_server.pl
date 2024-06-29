@@ -102,23 +102,24 @@ cors(Request),
                                 month(Month, [default("MONTH")]),
                                 day(Day, [default("DAY")]),
                                 year(Year, [default("YEAR")])]),
-                                term_string(StateTerm, State),
-                                term_string(NameTerm, Name),
-                                term_string(CityTerm, City),
-                                term_string(MonthTerm, Month),
-                                term_string(DayTerm, Day),
-                                term_string(YearTerm, Year),
+                                
+    term_string(StateTerm, State),
+    term_string(NameTerm, Name),
+    term_string(CityTerm, City),
+    term_string(MonthTerm, Month),
+    term_string(DayTerm, Day),
+    term_string(YearTerm, Year),
 
     findall(
 	    setlist(ID,venue(NAME,CITY,STATE),date(MONTH, DAY, YEAR),SONGS),
         (
-                setlist(ID, venue(NAME, CITY, STATE), date(MONTH, DAY, YEAR), SONGS),
-                STATE = StateTerm,
-                NAME = NameTerm,
-                CITY = CityTerm,
-                MONTH = MonthTerm,
-                DAY = DayTerm,
-                YEAR = YearTerm
+            setlist(ID, venue(NAME, CITY, STATE), date(MONTH, DAY, YEAR), SONGS),
+            STATE = StateTerm,
+            NAME = NameTerm,
+            CITY = CityTerm,
+            MONTH = MonthTerm,
+            DAY = DayTerm,
+            YEAR = YearTerm
 	    ),
 	    Setlists).
 
